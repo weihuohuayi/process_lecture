@@ -1,0 +1,1166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>建模语言</title><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
+
+
+@import '';
+
+:root {
+  --side-bar-bg-color: #dbe2ef;
+  --control-text-color: #777;
+  --font-sans-serif: 'Ubuntu', 'Source Sans Pro', sans-serif !important;
+  --font-monospace: 'Roboto Mono', monospace !important;
+  --font-code: 'Fira Code Medium', '微软雅黑', 'Roboto Mono', monospace !important;
+  --font-flower: 'Monotype Corsiva', 'Segoe print', 'Stylus BT';
+  --table-odd-bgcolor: #d2e4fc;
+  --table-even-bgcolor: #e8edff;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans-serif);
+  color: #34495e;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6rem;
+  letter-spacing: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* 正文标题区: #write */
+
+#write {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 30px 100px;
+}
+
+#write p {
+  line-height: 1.6rem;
+  word-spacing: 0.05rem;
+}
+
+#write ol li {
+  padding-left: 0.5rem;
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+  margin-top: 30px;
+}
+
+body > *:first-child {
+  margin-top: 0 !important;
+}
+
+body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+a {
+  color: #42b983;
+  font-weight: 600;
+  padding: 0 2px;
+  text-decoration: none;
+}
+
+del {
+  color: #b4b4b4;
+  padding: 1px 2px;
+}
+
+h1,
+h2 {
+  background: #4e4e4e;
+  border-radius: 6px 6px 6px 6px;
+  box-shadow: 0 0 0 1px #5f5a4b, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+  color: #00f7ffde;
+  font-family: '微软雅黑', '宋体', '黑体', Arial;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  margin: 20px 0px !important;
+  padding: 10px 0px 10px 10px;
+  letter-spacing: 2px;
+}
+
+h3 {
+  color: rgb(255, 255, 255);
+  font-family: '微软雅黑', '宋体', '黑体', Arial;
+  font-weight: bold;
+  line-height: inherit;
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+  margin-right: 5px;
+  padding: 8px 15px;
+  letter-spacing: 2px;
+  /* 文字间距; */
+  background-color: rgb(63, 81, 181);
+  background-image: linear-gradient(to right bottom, rgb(0, 188, 212), rgb(63, 81, 181));
+  border-left: 10px solid rgb(51, 51, 51);
+  border-radius: 5px;
+  text-shadow: rgb(102, 102, 102) 1px 1px 1px;
+  box-shadow: rgb(102, 102, 102) 1px 1px 2px;
+}
+
+h4 {
+  font-size: 18px;
+  font-family: '微软雅黑', '宋体', '黑体', Arial;
+  font-weight: bold;
+  color: rgb(21, 102, 29);
+  padding-right: 1rem;
+  /* 下划线 */
+  display: flex;
+  max-width: fit-content;
+  border-bottom: 1.5px solid rgb(12, 137, 24);
+  margin-bottom: 5px;
+}
+
+h5 {
+  /* font-size: 18px; */
+  font-size: 1.2em;
+  font-family: inherit;
+  font-weight: normal;
+
+  display: flex;
+  /* float: left; */
+  max-width: fit-content;
+
+  margin-bottom: 10px;
+  margin-top: 4px;
+  margin-left: 15px;
+  padding-right: 1em;
+  padding-left: 1em;
+  word-break: break-all;
+
+  height: 34px;
+  line-height: 34px;
+  color: rgb(255, 255, 238);
+  /* border-color: rgb(236, 80, 134);
+  background-color: rgb(214, 0, 74); */
+  border-color: #10aeff;
+  background-color: #1485ee;
+}
+
+h6 {
+  /* background-color: #ddd; */
+  padding: 0px 4px;
+  margin-bottom: 0px;
+  display: flex;
+  max-width: fit-content;
+  border-left: 4px solid #0080ff;
+  border-right: 4px solid #0080ff;
+}
+
+/* 定义标题计数及前后缀 */
+h2 {
+  counter-reset: section;
+}
+
+h3 {
+  counter-reset: subsection;
+}
+
+h4 {
+  counter-reset: subsubsection;
+}
+
+h3::before {
+  counter-increment: section;
+  content: counter(section, cjk-ideographic) '、 ';
+}
+
+h4::before {
+  counter-increment: subsection;
+  content: counter(subsection);
+  font-weight: bold;
+  /* font-size: 16px; */
+  color: rgb(255, 255, 255);
+  float: left;
+  margin-right: 8px;
+  padding: 2px 8px;
+  background-color: rgb(12, 137, 24);
+}
+
+h5::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  width: 650px;
+  left: -15px;
+  z-index: 1;
+  /* border-bottom: 2px solid rgb(214, 0, 74); */
+  border-bottom: 2px solid #1485ee;
+
+  word-break: break-all;
+}
+
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+  text-decoration: none;
+}
+
+h1 tt,
+h1 code {
+  font-size: inherit !important;
+}
+
+h2 tt,
+h2 code {
+  font-size: inherit !important;
+}
+
+h3 tt,
+h3 code {
+  font-size: inherit !important;
+}
+
+h4 tt,
+h4 code {
+  font-size: inherit !important;
+}
+
+h5 tt,
+h5 code {
+  font-size: inherit !important;
+}
+
+h6 tt,
+h6 code {
+  font-size: inherit !important;
+}
+
+h2 a,
+h3 a {
+  color: #34495e;
+}
+
+h1 {
+  padding-bottom: 0.4rem;
+  font-size: 2.2rem;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 1.225;
+  margin: 35px 0 15px;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 1.43;
+  margin: 20px 0 7px;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p,
+blockquote,
+ul,
+ol,
+dl,
+table {
+  margin: 0.8em 0;
+}
+
+li > ol,
+li > ul {
+  margin: 0 0;
+}
+
+hr {
+  height: 2px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body > h1:first-child + h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body > h3:first-child,
+body > h4:first-child,
+body > h5:first-child,
+body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1,
+a:first-child h2,
+a:first-child h3,
+a:first-child h4,
+a:first-child h5,
+a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1 p,
+h2 p,
+h3 p,
+h4 p,
+h5 p,
+h6 p {
+  margin-top: 0;
+}
+
+/* 列表 */
+
+li p.first {
+  display: inline-block;
+}
+
+ul,
+ol {
+  padding-left: 30px;
+}
+
+/* 列表标记带颜色，内容不带颜色 */
+ol > li,
+ul > li {
+  /* color: #db4d52; */
+  color: #0099ff;
+  font-weight: bold;
+}
+ol > li > *,
+ul > li > * {
+  color: #333;
+  font-weight: normal;
+}
+/* 
+ol > li > *:not(ol):not(ul), ul > li > *:not(ol):not(ul) {
+  padding-left: .25rem;
+}
+ */
+
+ul:first-child,
+ol:first-child {
+  margin-top: 0;
+}
+
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}
+
+/* 引言 */
+blockquote {
+  border-left: 4px solid #42b983;
+  padding: 10px 15px;
+  color: #777;
+  background-color: rgba(66, 185, 131, 0.1);
+}
+
+/* 表格 */
+table {
+  padding: 0;
+  word-break: initial;
+}
+
+table tr {
+  border-top: 1px solid #dfe2e5;
+  margin: 0;
+  padding: 0;
+}
+
+thead {
+  background-color: #b9c9fe;
+}
+
+table tr th {
+  font-weight: bold;
+  border: 1px solid #dfe2e5;
+  border-bottom: 0;
+  text-align: center;
+  font-size: 20px;
+  margin: 0;
+  padding: 6px 13px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(128, 102, 160);
+}
+
+table tr td {
+  border: 1px solid #dfe2e5;
+  text-align: left;
+  margin: 0;
+  /* background-color: #e8edff; */
+  padding: 6px 13px;
+  border-color: rgb(128, 102, 160);
+}
+
+table thead tr:nth-child(2n) td {
+  background-color: var(--table-even-bgcolor);
+}
+
+table thead tr:nth-child(2n-1) td {
+  background-color: var(--table-odd-bgcolor);
+}
+
+table tbody tr:nth-child(2n) td {
+  background-color: var(--table-odd-bgcolor);
+}
+
+table tbody tr:nth-child(2n-1) td {
+  background-color: var(--table-even-bgcolor);
+}
+
+table tr th:first-child,
+table tr td:first-child {
+  margin-top: 0;
+}
+
+table tr th:last-child,
+table tr td:last-child {
+  margin-bottom: 0;
+}
+
+table tbody tr td:hover {
+  background-color: #dbe2ef;
+}
+
+table thead tr th:hover {
+  background-color: #b3fff2 !important;
+}
+
+#write strong {
+  padding: 0 1px;
+}
+
+#write em {
+  padding: 0 5px 0 2px;
+}
+
+/* 表头颜色 */
+#write table thead th {
+  background-color: #b9c9fe;
+}
+
+/* 代码修饰 */
+
+#write .code-tooltip {
+  /*输入代码格式的地方文字颜色*/
+  color: blueviolet;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: var(--font-code);
+}
+
+/*  CodeMirror basic  */
+
+#write .CodeMirror {
+  /* Set height, width, borders, and global font properties here */
+  font-family: var(--font-code);
+  border-radius: 15px;
+}
+
+/* pre 代码片段修饰 */
+/* PADDING */
+#write .CodeMirror-lines {
+  padding: 4px 0; /* Vertical padding around content */
+}
+#write .CodeMirror pre {
+  padding: 0 4px; /* Horizontal padding of content */
+}
+
+#write .CodeMirror-wrap .CodeMirror-code pre {
+  padding-left: 12px;
+}
+
+/* 头文件 */
+#write pre.md-meta-block {
+  padding: 1rem;
+  background-color: #f7f7f7;
+  border: 0;
+  border-radius: 3px;
+  color: #777777;
+  line-height: 1.45;
+  font-size: 85%;
+  margin-top: 0 !important;
+}
+
+#write .CodeMirror-wrap .CodeMirror-scroll {
+  padding-top: 35px;
+  margin-top: 0px;
+}
+
+#write .CodeMirror-scroll {
+  background-color: white;
+  margin-bottom: 2px;
+}
+
+/* GUTTER */
+#write .CodeMirror-gutters {
+  height: 100%;
+  border: none;
+  /* background-color: #f7f7f7; */
+  background-color: white;
+  white-space: nowrap;
+}
+
+/* 光标 */
+#write .CodeMirror-cursor {
+  border-left: 1px solid black;
+  border-right: none;
+  width: auto;
+  border: 0 !important;
+  background: #7e7;
+  opacity: 50%;
+}
+
+#write .CodeMirror-sizer {
+  position: relative;
+  border-left: 1px solid #ccc;
+  background-color: #f7f7f7;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+/* 代码类型右上角显示 */
+#write .md-fences:before {
+  content: attr(lang); /*  css3中新增加了伪类before，after。其中content可以通过调用attr() 方法获取到某个伪类所属dom元素的属性值。*/
+  z-index: 4;
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  font-family: var(--font-flower);
+  font-weight: bold;
+  text-indent: 12px;
+  color: gray;
+  font-size: 20px;
+  float: right;
+}
+
+/* Mac 三原色 */
+#write .md-fences:after {
+  content: '';
+  z-index: 4;
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  float: left;
+  border-radius: 50%;
+  background-color: #fa3534;
+  box-shadow: 25px 0px #fdbc40, 50px 0px #35cd4b;
+}
+
+#write .md-fences:not([mermaid-type]) {
+  border: 1px solid #f4f4f4;
+  -webkit-font-smoothing: initial;
+  margin: 0.8rem 0 !important;
+  /* padding: 0.3rem 0 !important; */
+  line-height: 1.5rem;
+  background-color: #f8f8f8 !important;
+  border-radius: 15px;
+  font-family: var(--font-monospace);
+  font-size: 0.85rem;
+  word-wrap: normal;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* tt 打字机文本 */
+#write code,
+tt {
+  font-size: 0.875rem;
+  padding: 2px 0.25rem;
+  margin: 0 2px;
+  border: 1px solid #0000001a;
+  border-radius: 0.25rem;
+  font-family: var(--font-code);
+}
+
+/* ‘’ code 定义计算机代码文本*/
+code {
+  font-family: var(--font-code);
+  /* font-weight: bold; */
+  color: #b91e45;
+  /* color: rgb(30, 107, 184); */
+  /* background-color: #f8f8f8; */
+  background-color: #c4e5ef;
+  /* background-color:rgba(27, 31, 35, 0.05); */
+  word-break: break-all;
+}
+
+/* 定义键盘文本。它表示文本是从键盘上键入的。 */
+kbd {
+  /* font-family: 'Fira Mono', 'Cousine', 'Consolas', monospace; */
+  font-family: var(--font-code);
+  border: 2px solid #0000001a;
+  background: #f7f7f7;
+  color: #333;
+  box-shadow: none;
+}
+
+/* 任务完成列表显示样式 */
+.task-list-done {
+  /* styles for completed tasks */
+  text-decoration: line-through;
+  text-decoration-style: double;
+  text-decoration-color: darkblue;
+  font: caption;
+  font-style: italic;
+  /* font-family: -webkit-body; */
+  -webkit-text-fill-color: cornflowerblue;
+}
+
+.task-list-not-done {
+  /* styles for incomplete tasks */
+  /* color: darkred !important; */
+  -webkit-text-fill-color: blue;
+}
+
+#write .md-footnote {
+  background-color: #f8f8f8;
+  color: #e96900;
+}
+
+/* heighlight. */
+#write mark {
+  background-color: #ebffeb;
+  border-radius: 2px;
+  padding: 2px 4px;
+  margin: 0 2px;
+  color: #222;
+  font-weight: 500;
+}
+
+#write dialog {
+  background-color: #ebffeb;
+  border-radius: 2px;
+  padding: 2px 4px;
+  margin: 0 2px;
+  color: #222;
+  font-weight: 500;
+}
+
+/* #write dialog {
+  width: 180px;
+  height: 36px;
+  line-height: 36px;
+  background: #c0eeff;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+}
+
+
+#write dialog:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -14px;
+  /* 画三角形 */
+/* width: 0;
+height: 0;
+border-top: 10px solid transparent;
+border-right: 20px solid #c0eeff;
+border-bottom: 10px solid transparent;
+border-left: 0 solid #c0eeff;
+
+} */
+
+*/ .cm-s-inner .cm-link,
+.cm-s-inner.cm-link {
+  color: #22a2c9;
+}
+
+.cm-s-inner .cm-string {
+  color: #22a2c9;
+}
+
+//复制codemirror尝试
+
+//
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+  html {
+    font-size: 13px;
+  }
+
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+
+  pre {
+    word-wrap: break-word;
+  }
+}
+
+#write > h3.md-focus:before {
+  left: -1.5625rem;
+  top: 0.375rem;
+}
+
+#write > h4.md-focus:before {
+  left: -1.5625rem;
+  top: 0.285714286rem;
+}
+
+#write > h5.md-focus:before {
+  left: -1.5625rem;
+  top: 0.285714286rem;
+}
+
+#write > h6.md-focus:before {
+  left: -1.5625rem;
+  top: 0.285714286rem;
+}
+
+/* 图片 */
+.md-image > .md-meta {
+  border-radius: 3px;
+  font-family: var(--font-monospace);
+  padding: 2px 0 0 4px;
+  font-size: 0.9em;
+  color: inherit;
+}
+
+/* 对这些的标签记号进行定义，<code></code> 怎么显示 */
+.md-tag {
+  color: inherit;
+}
+
+/* [TOC]目录树区 */
+.md-toc {
+  margin-top: 15px;
+  padding-bottom: 15px;
+  color: #777777;
+  background-color: rgb(200, 224, 255);
+  box-shadow: 4px 4px 4px #aaa;
+  /* blur: 2px; */
+  border-radius: 20px;
+  border-left: 4px solid rgb(204, 204, 204);
+  border-top: 4px solid rgb(207, 207, 207);
+}
+
+.md-toc-inner {
+  text-decoration: none;
+  color: navy;
+}
+
+.md-toc-content {
+  counter-reset: h1toc;
+}
+
+/* 控制TOC水平 */
+
+/* 显示从h1到的标题h3，要隐藏较低级别的标题。可根据需求自行修改 */
+.md-toc-h1 {
+  margin-left: 0;
+  font-size: 1.5rem;
+  counter-reset: h2toc;
+}
+
+.md-toc-h2 {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  counter-reset: h3toc;
+  /* display: none; */
+}
+
+.md-toc-h3 {
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  counter-reset: h4toc;
+}
+
+.md-toc-h4 {
+  margin-left: 2rem;
+  font-size: 0.85rem;
+  counter-reset: h5toc;
+}
+
+.md-toc-h5 {
+  margin-left: 5rem;
+  font-size: 0.8rem;
+  counter-reset: h6toc;
+  display: none;
+}
+
+.md-toc-h6 {
+  margin-left: 6rem;
+  font-size: 0.75rem;
+  display: none;
+}
+
+.md-toc-h1:before {
+  color: black;
+  counter-increment: h1toc;
+  content: counter(h1toc) '. ';
+}
+
+.md-toc-h1 .md-toc-inner {
+  margin-left: 0;
+}
+
+.md-toc-h2:before {
+  font-wight: bold;
+  counter-increment: h2toc;
+  /* content: counter(h1toc) '. ' counter(h2toc) '. '; */
+}
+
+.md-toc-h2 .md-toc-inner {
+  margin-left: 0;
+}
+
+.md-toc-h3:before {
+  counter-increment: h3toc;
+  /* content: counter(h1toc) '. ' counter(h2toc) '. ' counter(h3toc) '. '; */
+  content: counter(h3toc) '. ';
+}
+
+.md-toc-h3 .md-toc-inner {
+  margin-left: 0;
+}
+
+.md-toc-h4:before {
+  counter-increment: h4toc;
+  /* content: counter(h1toc) '. ' counter(h2toc) '. ' counter(h3toc) '. ' counter(h4toc) '. '; */
+  content: counter(h3toc) '. ' counter(h4toc) '. ';
+}
+
+.md-toc-h4 .md-toc-inner {
+  margin-left: 0;
+}
+
+.md-toc-h5:before {
+  counter-increment: h5toc;
+  content: counter(h1toc) '. ' counter(h2toc) '. ' counter(h3toc) '. ' counter(h4toc) '. ' counter(h5toc) '. ';
+}
+
+.md-toc-h5 .md-toc-inner {
+  margin-left: 0;
+}
+
+.md-toc-h6:before {
+  counter-increment: h6toc;
+  content: counter(h1toc) '. ' counter(h2toc) '. ' counter(h3toc) '. ' counter(h4toc) '. ' counter(h5toc) '. ' counter(h6toc) '. ';
+}
+
+.md-toc-h6 .md-toc-inner {
+  margin-left: 0;
+}
+
+/* 侧边栏 */
+
+.sidebar-tabs {
+  border-bottom: none;
+}
+.sidebar-content {
+  counter-reset: h1;
+}
+
+.outline-h1 {
+  counter-reset: h2;
+}
+
+.outline-h2 {
+  counter-reset: h3;
+}
+
+.outline-h3 {
+  counter-reset: h4;
+}
+
+.outline-h4 {
+  counter-reset: h5;
+}
+
+.outline-h5 {
+  /* counter-reset: h6; */
+}
+
+/* .outline-h1 > .outline-item > .outline-label:before {
+  counter-increment: h1;
+  content: counter(h1) '. ';
+} */
+
+/* .outline-h2 > .outline-item > .outline-label:before {
+  counter-increment: h2;
+  content: counter(h1) '.' counter(h2) '. ';
+} */
+
+.outline-h3 > .outline-item > .outline-label:before {
+  counter-increment: h3;
+  /* content: counter(h1) '.' counter(h2) '.' counter(h3) '. '; */
+  content: counter(h3) '. ';
+}
+
+.outline-h4 > .outline-item > .outline-label:before {
+  counter-increment: h4;
+  content: counter(h3) '.' counter(h4) '. ';
+}
+
+/* .outline-h5 > .outline-item > .outline-label:before {
+  counter-increment: h5;
+  content: counter(h1) '.' counter(h2) '.' counter(h3) '.' counter(h4) '.' counter(h5) '. ';
+}
+
+.outline-h6 > .outline-item > .outline-label:before {
+  counter-increment: h6;
+  content: counter(h1) '.' counter(h2) '.' counter(h3) '.' counter(h4) '.' counter(h5) '.' counter(h6) '. ';
+} */
+
+#typora-quick-open {
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+  background-color: #fafafa;
+  border-color: #fefefe #e5e5e5 #e5e5e5 #eee;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#md-notification:before {
+  top: 10px;
+}
+
+/** focus mode */
+
+.on-focus-mode blockquote {
+  border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header,
+.context-menu,
+.megamenu-content,
+footer {
+  font-family: var(--font-sans-serif);
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state {
+  visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+  background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+  color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+  --item-hover-bg-color: #e6f0fe;
+}
+
+
+
+</style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write'  class=''><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2><a name="建模语言" class="md-header-anchor"></a><span>建模语言</span></h2><p>&nbsp;</p><p>&nbsp;</p><h3><a name="导言" class="md-header-anchor"></a><span>导言</span></h3><p>&nbsp;</p><h4><a name="建模是认识客观世界的有力工具" class="md-header-anchor"></a><span>建模是认识客观世界的有力工具</span></h4><p><img src="img/image-20220113080605250.png" referrerpolicy="no-referrer" alt="image-20220113080605250"></p><p>&nbsp;</p><h4><a name="流程建模是流程管理的基础" class="md-header-anchor"></a><span>流程建模是流程管理的基础</span></h4><p><img src="img/image-20220113080508933.png" referrerpolicy="no-referrer" alt="image-20220113080508933"></p><ul><li><span>随着流程概念的普及，越来越多的企业意识到流程管理的重要性。</span></li><li><span>流程建模是流程管理的基础，如果无法描述，就无法认知，如果无法认知，又何谈管理。</span></li></ul><p>&nbsp;</p><h3><a name="建模语言符号的多样性与统一性" class="md-header-anchor"></a><span>建模语言符号的多样性与统一性</span></h3><h4><a name="模型语言符号的多样性" class="md-header-anchor"></a><span>模型语言符号的多样性</span></h4><p><span>由于地理隔离和信息壁垒，在人类发展的历史长河中，不同民族不同行业对同一个客观事物的描述形成了不同的语言模型</span></p><p><img src="img/image-20220113080722074.png" referrerpolicy="no-referrer" alt="image-20220113080722074"></p><p><span>就像汉字是中国人书面表达的标准，阿拉伯数字是全世界数字表达的标准</span></p><p>&nbsp;</p><h5><a name="各行各业" class="md-header-anchor"></a><span>各行各业</span></h5><p><span>各行各业的专属建模语言</span></p><ul><li><span>UML 用于</span><mark><span>软件工程</span></mark><span>建模，包括：业务建模、需求建模、设计建模、测试建模。</span></li><li><span>Sys ML用于</span><mark><span>系统工程</span></mark><span>建模，包括：系统需求建模，系统设计建模。</span></li><li><span>Archimate用于</span><mark><span>企业架构</span></mark><span>建模，包括：战略目标，业务架构，应用架构，技术架构。</span></li><li><span>Modelica用于</span><mark><span>物理设备</span></mark><span>的建模，包括：物理结构，算法逻辑。                                   </span></li></ul><p><img src="img/image-20220112221617010.png" referrerpolicy="no-referrer" alt="image-20220112221617010"></p><p>&nbsp;</p><p><span>建模还面向特定应用制定了相关的标准，例如：</span></p><ul><li><span>UPDM：武器装备统一建模平台</span></li><li><span>NIEM：跨领域信息交换方法与技术</span></li><li><span>BPMN：业务流程建模符号 </span></li></ul><p>&nbsp;</p><p><img src="img/image-20220113075342919.png" referrerpolicy="no-referrer" alt="image-20220113075342919"></p><blockquote><p><span>各种语言、图形都是人类对现实世界和思维的建模</span></p></blockquote><p>&nbsp;</p><p>&nbsp;</p><h5><a name="流程领域" class="md-header-anchor"></a><span>流程领域</span></h5><p><span>在流程领域，流程建模的标准有哪些？</span></p><p>&nbsp;</p><h6><a name="流程领域的多种模型语言符号" class="md-header-anchor"></a><span>流程领域的多种模型语言符号</span></h6><p><span>事实上，流程建模标准并非只能选一个，不同阶段、不同级别、不同类型的模型，或者面对不同的群体，使用不同的标准是合适的。</span></p><figure><table><thead><tr><th><span>建模符号</span></th><th><span>描述</span></th></tr></thead><tbody><tr><td><span>流程图（Flow Charting）</span></td><td><span>ANSI（美国国家标准学会）标准，语言符号较为简单，用于流程的“快速捕获”</span></td></tr><tr><td><span>事件处理链（EРC）</span></td><td><span>在ARIS的框架内开发，将事件视为流程步骤的触发或结果，对建模复杂的流程很有用</span></td></tr><tr><td><span>统一建模语言（UML）</span></td><td><span>由OMG（对象管理小组）维护，这是一套标准的制图技术，主要用于描述信息系统要求的符号</span></td></tr><tr><td><span>集成定义语言（IDEF）</span></td><td><span>联邦信息处理标准，着重强调流程的输入，输出，机制和控制，并清楚地将流程的细节向上和向下链接</span></td></tr><tr><td><span>业务流程模型（BPMN）</span></td><td><span>OMG（对象管理小组）创建的标准，一共103个图标，可用于向不同对象展示流程模型</span></td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h4><a name="模型语言符号的统一性" class="md-header-anchor"></a><span>模型语言符号的统一性</span></h4><p><span>通过建模可以对客观事物进行准确描述，有了统一标准的模型，沟通便快速进入主题。</span></p><p><img src="img/image-20220113080852629.png" alt="image-20220113080852629" style="zoom:50%;" /></p><p>&nbsp;</p><h5><a name="各行各业-n1053" class="md-header-anchor"></a><span>各行各业</span></h5><ul><li><span>随着人类交流越来越频繁和学科交叉融合度越来越高，信息交流的统一与规范就显得越来越重要</span></li><li><span>我们通过统一模型语言符号对客观世界进行科学的描述，形成跨种族跨国家的共识</span></li></ul><figure><table><thead><tr><th><span>电路图</span></th><th><span>设计平面图</span></th><th><span>晶体模型</span></th></tr></thead><tbody><tr><td><img src="img/image-20220113065736082.png" referrerpolicy="no-referrer" alt="image-20220113065736082"></td><td><img src="img/image-20220113065922302.png" alt="image-20220113065922302" style="zoom:67%;" /></td><td><img src="img/image-20220113070907897.png" alt="image-20220113070907897" style="zoom:300%;" /></td></tr></tbody></table></figure><p>&nbsp;</p><blockquote><p><span>统一的建模语言有助于减少信息的错误理解和交流成本，更好得协调各方共同关注探讨核心问题。</span></p></blockquote><p>&nbsp;</p><h5><a name="流程领域-n1054" class="md-header-anchor"></a><span>流程领域</span></h5><p><img src="img/image-20220113074906284.png" referrerpolicy="no-referrer" alt="image-20220113074906284"></p><blockquote><p><span>企业流程管理，需要建立统一的、标准的流程语言，否则，各方在表达流程的时候将陷入混乱，流程管理也将无从谈起。</span></p></blockquote><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h3><a name="业务流程的几种主流流程建模语言符号规范" class="md-header-anchor"></a><span>业务流程的几种主流流程建模语言符号规范</span></h3><p>&nbsp;</p><h4><a name="什么是业务流程" class="md-header-anchor"></a><span>什么是业务流程？</span></h4><p><span> 要对业务领域进行建模，我们需要了解基本的术语。最基本的是业务流程。根据BusinessDictionary.com                             [2]，它是“一系列逻辑上相关的活动或任务（例如计划，生产或销售）一起执行以产生一组定义的结果”。在现实生活中，我们会考虑许多并行发生的业务流程。在大多数情况下，他们被设定为实现许多目标。组织越大，过程与结果之间的关系就越复杂。迫切需要使用清晰的模型以图形方式解释复杂的过程。</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h4><a name="流程图flow-charting）" class="md-header-anchor"></a><span>流程图（Flow Charting）</span></h4><p><span>流程图基于一组用于操作决策的符号以及其他主要流程元素。最常见的流程图表示法在1970年被批准为ANSI标准。</span></p><p><img src="img/image-20220113072233729.png" referrerpolicy="no-referrer" alt="image-20220113072233729"></p><h5><a name="优点" class="md-header-anchor"></a><span>优点</span></h5><ul><li><span>符号集较为简单</span></li><li><span>理解较为容易</span></li><li><span>有助于建立共识</span></li><li><span>无需专门的工具</span></li></ul><h5><a name="缺点" class="md-header-anchor"></a><span>缺点</span></h5><ul><li><span>多样化的自定义使得不同企业间的语言存在差异</span></li><li><span>用于描述复杂的业务流程时可能不够精确</span></li><li><span>缺乏描述性属性集</span></li></ul><h4><a name="事件流程链epc）" class="md-header-anchor"></a><span>事件流程链（EPC）</span></h4><p><span>EPC全称事件驱动流程链Event-driven Process Chain，是在1990年代初期由萨尔兰德大学的Wilhelm-August Scheer教授在ARIS框架内开发的。EPC认为流程是由一系列事件触发的，并且针对事件的行为又将引发新的事件。因此，流程通常是事件-功能-事件的形式。</span></p><p><span>EPC包含四个主要要素：事件（Event）、功能（Function）、组织单元（Orgnization Unit）、信息（Data）。EPC严重依赖于称为“规则”的逻辑运算符，包括“与”，“或”和“异或”。这些规则对象可以表示流程中的决策、测试、并行性和收敛性。</span></p><p><img src="img/image-20220113072411923.png" referrerpolicy="no-referrer" alt="image-20220113072411923"></p><h5><a name="优点-n125" class="md-header-anchor"></a><span>优点</span></h5><ul><li><span>在德国等欧洲国家，尤其是在跨国企业中使用广泛</span></li><li><span>EPC流程具有较强的可读性</span></li><li><span>上手较为简单</span></li><li><span>用于识别过程约束的最强大和最通用的工具之一</span></li></ul><h5><a name="缺点-n135" class="md-header-anchor"></a><span>缺点</span></h5><ul><li><span>在欧洲外知名度低于BPMN和流程图，国内应用更为匮乏</span></li><li><span>建模团队必须在使用符号方面受到约束，以避免可能出现的逻辑空白</span></li><li><span>受限于ARIS工具，国内常用的流程建模工具鲜有支持EPC</span></li></ul><p>&nbsp;</p><h4><a name="统一建模语言uml）" class="md-header-anchor"></a><span>统一建模语言（UML）</span></h4><p><img src="img/image-20220113003120314.png" alt="image-20220113003120314" style="zoom: 25%;" /></p><p><span>UML（统一建模语言，Unified Modeling Language）是一种定义良好、易于表达、功能强大且普遍适用的可视化建模语言。 UML提供了一套标准的制图技术和符号，主要用于描述信息系统的需求。虽然UML主要用于系统分析和设计，但一些组织也将UML活动图用于业务流程建模。 UML由对象管理组（OMG）维护，对象管理组是信息系统领域的标准制定机构。</span></p><p><img src="img/image-20220113072652116.png" referrerpolicy="no-referrer" alt="image-20220113072652116"></p><p>&nbsp;</p><p><img src="img/image-20220115100601596.png" referrerpolicy="no-referrer" alt="image-20220115100601596"></p><p>&nbsp;</p><h5><a name="优点-n148" class="md-header-anchor"></a><span>优点</span></h5><ul><li><span>完善的用户社区</span></li><li><span>参考资料丰富易得</span></li><li><span>面向对象语言类型，适合程序员</span></li></ul><h5><a name="缺点-n156" class="md-header-anchor"></a><span>缺点</span></h5><ul><li><span>业务流程建模是次要用途</span></li><li><span>符号表示可能因工具而异</span></li></ul><p>&nbsp;</p><p>&nbsp;</p><h4><a name="系统模型语言-sysml" class="md-header-anchor"></a><span>系统模型语言 SysML</span></h4><p><img src="img/image-20220113074728796.png" referrerpolicy="no-referrer" alt="image-20220113074728796"><span>  </span></p><p><span>优缺点同UML</span></p><p>&nbsp;</p><h4><a name="集成定义语言idef" class="md-header-anchor"></a><span>集成定义语言IDEF</span></h4><p><strong><span>IDEF</span></strong><span>是一种建模语言家族，其用途广泛，从功能建模到数据、模拟、面向对象的分析/设计和信息收集。IDEF包含从</span><strong><span>IDEF0</span></strong><span>到 IDEF14。</span></p><p><strong><span>IDEF</span></strong><span>由美国空军构思并于 1970 年代中期开发。它是作为记录业务流程和评估它们的主要工具而开发的。现在，这种技术被用作研究组织、捕获“原样”流程模型和模拟商业社区运营的严格框架。</span></p><p><span>IDEF包含一组非常简单的符号，其中包括带有箭头的过程框，这些箭头表示输入、输出、控件和机制。尽管从左至右，从上至下分别读取模型的每个级别，但是主要步骤所使用的编号系统以一种易于表示的父级和子级分解过程之间的关联方式表示。例如，名为A1.3的子进程框被解释为父图A1的子进程。分解的每个连续级别都使用另一个小数点来继续这种沿袭的简单可追溯性。</span></p><p><img src="img/image-20220113072747504.png" referrerpolicy="no-referrer" alt="image-20220113072747504"></p><h5><a name="优点-n168" class="md-header-anchor"></a><span>优点</span></h5><ul><li><span>精确表达</span></li><li><span>易于遵循的模型级别逻辑分解</span></li><li><span>可从美国联邦政府或商业渠道获得详尽的文档</span></li></ul><h5><a name="缺点-n176" class="md-header-anchor"></a><span>缺点</span></h5><ul><li><span>看起来较为复杂，在视觉上不吸引人</span></li><li><span>主要由方框和箭头组成的符号可能显得杂乱</span></li></ul><p><img src="img/image-20220113072758605.png" referrerpolicy="no-referrer" alt="image-20220113072758605"></p><p>&nbsp;</p><p>&nbsp;</p><h4><a name="业务流程模型表示法bpmn）" class="md-header-anchor"></a><span>业务流程模型表示法（BPMN）</span></h4><p><span>Business Process Model and Notation 2.0是由Business Process Management Initiative创建的标准，现已与Object Management Group（OMG）合并。BPMN越来越被广泛接受。它提供了丰富的符号集，可用于对业务流程的不同方面进行建模。</span></p><h5><a name="优点-n187" class="md-header-anchor"></a><span>优点</span></h5><ul><li><span>广泛使用和理解</span></li><li><span>是美国的事实上的标准</span></li><li><span>在美国国防部和其他政府机构中大量使用</span></li><li><span>用于识别过程约束的最强大，最通用的表示法之一。</span></li></ul><h5><a name="缺点-n197" class="md-header-anchor"></a><span>缺点</span></h5><ul><li><span>需要培训和经验才能正确使用全套符号</span></li><li><span>很难看到流程的多个级别之间的关系</span></li><li><span>不同的建模工具可能支持符号的不同子集</span></li></ul><p><img src="img/image-20220113072829815.png" referrerpolicy="no-referrer" alt="image-20220113072829815"></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h4><a name="架构建模语言archimate" class="md-header-anchor"></a><span>架构建模语言ArchiMate</span></h4><p><img src="img/image-20220115100947729.png" referrerpolicy="no-referrer" alt="image-20220115100947729"></p><p><span> ArchiMate的主要优点是它可以促进业务与IT的一致性。假设您被要求对业务流程进行建模，但还包括在给定场景中需要什么样的IT支持的信息。在ArchiMate中，可以很容易地将两层结合在一起。</span></p><p><span>业务层+应用程序层：</span></p><p><img src="img/image-20220115101108711.png" referrerpolicy="no-referrer" alt="image-20220115101108711"></p><p>&nbsp;</p><h3><a name="bpmn" class="md-header-anchor"></a><span>BPMN</span></h3><ul><li><span>BPMN，Business Process Model and Notation，业务流程模型与符号。</span></li><li><span>BPMN是一套流程建模的标准，主要目标是提供一套被所有业务用户容易理解的符号，支持从创建流程轮廓的业务分析到这些流程的最终实现，直到最终用户的管理监控。</span></li><li><span>提供了清晰而精准的执行语义来描述元素的操作。</span></li><li><span>BPMN规范还确保设计为业务流程执行的XML语言（如WS-BPEL），能够用这套以业务为中心的符号所可视化表示。</span></li><li><span>BPMN2.0的提出机构：BPMN2.0规范由OMG组织提出并维护。</span></li><li><span>业界主流厂商参与制定：IBM、Oracle、SAP等。</span></li><li><span>BPMN的接受程度：被广泛接受，目前全球有70余个产品实现(OMG登记的)。</span></li></ul><p>&nbsp;</p><p>&nbsp;</p><h3><a name="bpmn发展历史" class="md-header-anchor"></a><span>BPMN发展历史</span></h3><p><span>2011.1终版</span></p><p><img src="img/image-20220113223711802.png" referrerpolicy="no-referrer" alt="image-20220113223711802"></p><p>&nbsp;</p><p>&nbsp;</p><h3><a name="bpmn的例子" class="md-header-anchor"></a><span>BPMN的例子</span></h3><p>&nbsp;</p><p>&nbsp;</p><h4><a name="一个简单的订单流程" class="md-header-anchor"></a><span>一个简单的订单流程</span></h4><p><span>圆形表示事件，第一个元件表示开始事件，最后一个元件表示结束事件，圆角矩形表示一个任务(task/activity)，带箭头的实现表示顺序流(sequenceFlow)</span></p><p><img src="img/image-20220113010122227.png" referrerpolicy="no-referrer" alt="image-20220113010122227"></p><h4><a name="异常和结束状态" class="md-header-anchor"></a><span>异常和结束状态</span></h4><p><span>上图只描述了正常的情况。异常如何处理？所以业务流程图中应该新增其它异常分支。在BPMN中，使用菱形表示网关(gateway)，用来控制流程中的流向。注意图中包含了三个结束事件，每个结束事件表示不同的结束状态。</span></p><p><img src="img/image-20220113010548867.png" referrerpolicy="no-referrer" alt="image-20220113010548867"></p><h4><a name="泳道swimlane和执行者performer" class="md-header-anchor"></a><span>泳道(swimlane)和执行者(performer)</span></h4><p><span>泳道用来指明任务的执行者。注意不是所有的任务都会有执行者（更精确的说，只有user task才有执行者）。</span></p><p><img src="img/image-20220113011233616.png" referrerpolicy="no-referrer" alt="image-20220113011233616"></p><p>&nbsp;</p><h4><a name="子流程" class="md-header-anchor"></a><span>子流程</span></h4><p><span>执行订单是一个子流程，子流程必须有开始事件和结束事件，子流程内部的元件禁止和外部的元件直连，只能作为一个整体与父流程的元件相连接。</span></p><p><img src="img/image-20220113012003798.png" referrerpolicy="no-referrer" alt="image-20220113012003798"></p><p><img src="img/image-20220113223801600.png" referrerpolicy="no-referrer" alt="image-20220113223801600"></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h3><a name="bpmn20中的基础元件" class="md-header-anchor"></a><span>BPMN2.0中的基础元件</span></h3><p><span>除了事件触发的行为，你几乎可以使用的本章节的元件创建所有的业务流程。</span></p><h4><a name="activity" class="md-header-anchor"></a><span>Activity</span></h4><p><span>一个activity表示一份待完成的任务或工作，用圆角矩形表示。分为任务(task)和子流程(subprocess)。</span></p><h5><a name="任务" class="md-header-anchor"></a><span>任务</span></h5><p><span>任务（Task）是一个流程（Process)中的关键原子级的活动。</span></p><p><span>一个任务（Task）表示工作需要被外部实体完成，比如人工或自动服务。 任务的类型显示在矩形的左上角，用小图标区别。根据任务的类型，引擎会执行不同的功能。</span></p><p><span> </span></p><h6><a name="人工任务user-task" class="md-header-anchor"></a><span>人工任务(User Task)</span></h6><p><span>人工任务表示需要人来执行的任务，有一个输入和一个输出。</span></p><p><img src="img/image-20220113012204169.png" referrerpolicy="no-referrer" alt="image-20220113012204169"></p><p>&nbsp;</p><p>&nbsp;</p><h6><a name="服务任务service-task" class="md-header-anchor"></a><span>服务任务(Service Task)</span></h6><p><span>Service Task是一个自动活动，它会调用一些服务， 比如web 服务，java service等等，通过服务(可以是Web服务,也可以是自动化程序)来完成的任务。必须有一个输入和一个输出。</span></p><p><img src="img/image-20220113012226066.png" referrerpolicy="no-referrer" alt="image-20220113012226066"></p><p>&nbsp;</p><h6><a name="脚本任务script-task" class="md-header-anchor"></a><span>脚本任务(Script Task)</span></h6><p><span>脚本任务时一个自动活动，当到达这个任务的时候流程引擎会执行一个脚本。通过引擎可识别的脚本语言来进行自动化操作。必须有一个输入和一个输出。支持的脚本语言有Java，JavScript，XPath1.0，mvel。如下图所示。</span></p><p>&nbsp;</p><p>&nbsp;</p><p><span>脚本任务与服务任务的区别。服务任务一般用来处理和外部服务之间的交互。脚本任务只用来执行一些简单的逻辑。</span></p><p><span> </span></p><h6><a name="规则任务business-rule-task" class="md-header-anchor"></a><span>规则任务(Business Rule Task)</span></h6><p><span>规则任务用来执行使用Drools定义的规则集，规则集通过ruleflow-group来识别。</span></p><p>&nbsp;</p><p><span>Drools规则的定义</span></p><p>&nbsp;</p><h6><a name="其他task" class="md-header-anchor"></a><span>其他Task</span></h6><p><span>除了上面Task类型，在BPMN中还有：</span></p><ol start='' ><li><span>User Task - 需要人在计算机的帮助下完成的任务，但UserTask的属性都与Web Service相同，两者的区别在于此处的UserTask并不意图直接由Web Serivce等来执行，而是类似文档性地指出人是在什么的帮助下完成任务的，如果使用引擎执行这里，这里还有尚待解决的新问题。</span></li><li><span>Manual Task - 纯人工任务，没有计算机的参与。</span></li><li><span>Reference Task - 相当于其他Task的引用。</span></li></ol><p>&nbsp;</p><h6><a name="marker记号）" class="md-header-anchor"></a><span>Marker（记号）</span></h6><p><span>此外，在Task上可以设置一个Marker（记号），Marker的指代作用可以 在后面具体讲解中理解。</span></p><p><span>Marker有三种类型：1）Loop Marker 2) Multiple Instance Marker 3) Compensation Marker</span></p><p><img src="img/image-20220113221657584.png" referrerpolicy="no-referrer" alt="image-20220113221657584"></p><p>&nbsp;</p><ul><li><p><span>Loop Marker</span></p><ul><li><span>也被称为Standard Loop Marker，如果指定了该Marker，该任务就会通过使用一个布尔表达式来做出是否再次执行本任务的决定，布尔表达式的检测分为执行任务前和任务后检测，任务前检查相当于while循环，任务后检查相当于until循环。</span></li></ul></li><li><p><span>Multiple Instance Marker</span></p><ul><li><p><span>也被称为MultipleInstance Loop Marker，这个Marker对应着一种编程结构for each，但是多实例Marker使得一个Task将成为多实例任务，多实例任务是最复杂的。</span></p></li><li><p><span>首先一个多实例任务，会有一个表达式，表达式的返回值是一个整数，这个整数标识当前任务还可再生成的实例数目，每个实例都可以用来去完成一个任务。</span></p></li><li><p><span>一个多实例任务，分为两种类型，Sequential和Parallel</span></p><ul><li><span>Sequential任务类似于Standard Loop类型的Task，所有的待执行实例，会一个接一个地去执行。</span></li><li><span>而Parallel则将所有的待执行实例，并排展开，同时执行，而通过判断条件来进行实例调用，而实例的调用结果和当前Task是否标记为完成还有着复杂的关系</span></li></ul></li></ul></li><li><p><span>Compensation Marker</span></p><ul><li><span>compenstation marker标志一个compensation task，通常使用在发生异常的状况下，如下图这个例子，当向买者收费发生异常时，就需要调用一个补偿任务，将用户打来的款再支付给用户。</span></li></ul></li></ul><p>&nbsp;</p><p>&nbsp;</p><h4><a name="子流程subprocess" class="md-header-anchor"></a><span>子流程(subprocess)</span></h4><p><span>子流程表示多个activity的组合。子流程内部的元件禁止和外部的元件直连，只能作为一个整体与父流程的元件相连接。如下图所示。</span></p><p><img src="img/image-20220113013433732.png" referrerpolicy="no-referrer" alt="image-20220113013433732"></p><p>&nbsp;</p><p>&nbsp;</p><h4><a name="网关gateway" class="md-header-anchor"></a><span>网关(gateway)</span></h4><p><span>网关用来控制业务流程走向。</span></p><p><span>下面的值可以使用：</span></p><ul><li><span>converging：网关必须拥有多个进入顺序流， 但是只能有一个外出顺序流。</span></li><li><span>diverging：网关必须拥有一个进入顺序流， 和多个外出顺序流。</span></li></ul><p><span> </span></p><p>&nbsp;</p><h5><a name="唯一网关exclusive-gateway" class="md-header-anchor"></a><span>唯一网关(Exclusive Gateway)</span></h5><p><span>diverging</span></p><p><span>表示只有一个外向顺序流被执行。在执行时，必须确保至少一个外向顺序流上面的条件为true。</span></p><p><span>converging</span></p><p><span>每个入口顺序流执行完成之后，都会触发一次唯一网关后面的顺序流。</span></p><p><img src="img/image-20220113013658137.png" referrerpolicy="no-referrer" alt="image-20220113013658137"></p><p>&nbsp;</p><h5><a name="并行网关parallel-gateway" class="md-header-anchor"></a><span>并行网关(Parallel Gateway)</span></h5><p><img src="img/image-20220113013716388.png" referrerpolicy="no-referrer" alt="image-20220113013716388"></p><p><span>Diverging</span></p><p><span>表示多个外向顺心流会同时执行。</span></p><p><span>Converging</span></p><p><span>等待所有的入口顺序流完成之后，才会触发出口顺序流。</span></p><h5><a name="包含网关inclusive-gateway" class="md-header-anchor"></a><span>包含网关(Inclusive Gateway)</span></h5><p><span>可以同时执行多条线路，也可以在网关上设置条件</span></p><p><img src="img/image-20220113013814633.png" referrerpolicy="no-referrer" alt="image-20220113013814633"></p><p><span>Diverging</span></p><p><span>只要外向顺心流上面的条件为true，则都会被执行。</span></p><p><span>Converging</span></p><p><span>等待所有的active入口顺序流完成之后，才会触发出口顺序流。</span></p><p>&nbsp;</p><h4><a name="开始事件" class="md-header-anchor"></a><span>开始事件</span></h4><p><span>表示业务流程是如何开始的。用一个细线圆表示，园中的图标表示触发的方式。</span></p><p>&nbsp;</p><p><span>空启动事件: 表示没有指明触发者。子流程必须有一个空启动事件。</span></p><p><span>消息启动事件: 由外部消息来触发流程的执行。</span></p><p><span>定时器启动事件: 由时间来触发流程的执行。</span></p><h4><a name="结束事件" class="md-header-anchor"></a><span>结束事件</span></h4><p><span>使用粗线圆表示，意味着流程的一个顺序流的结束。和启动事件不一样，在一个流程中出现多个结束事件是非常常见的。</span></p><p>&nbsp;</p><p><span>空结束事件</span></p><p><span>表示流程中一个路径的结束，不返回任何结果。</span></p><p><span>消息结束事件</span></p><p><span>表示流程中一个路径的结束，并发送一个消息。</span></p><p><span>Terminate结束事件</span></p><p><span>结束整个流程的执行，即使有并行路径在执行。</span></p><p>&nbsp;</p><p><img src="img/image-20220113080136795.png" referrerpolicy="no-referrer" alt="image-20220113080136795"></p><h4><a name="顺序流sequence-flow" class="md-header-anchor"></a><span>顺序流(Sequence Flow)</span></h4><p><span>表示顺序执行的顺序，用实线箭头表达。</span></p><p><img src="img/image-20220113014129552.png" referrerpolicy="no-referrer" alt="image-20220113014129552"></p><h4><a name="数据data-object" class="md-header-anchor"></a><span>数据(Data Object)</span></h4><p><span>Data Object可以理解为流程实例的局部临时变量，流程实例结束后Data Object也被释放。</span></p><p><span> </span><img src="img/image-20220113080330369.png" referrerpolicy="no-referrer" alt="image-20220113080330369"></p><p>&nbsp;</p><h4><a name="编排choreography）" class="md-header-anchor"></a><span>编排（Choreography）</span></h4><p><span>编排是交互参与者之间的程序契约。池（或参与者）之间存在编排。</span></p><p><span>编排看起来类似于私有业务流程，由活动、事件和网关等组成。不同的是，编排中的活动表示一组（1个或多个）消息交换的交互，每个活动涉及两个或多个参与者。 </span></p><p><img src="img/image-20220113224556590.png" referrerpolicy="no-referrer" alt="image-20220113224556590"></p><p>&nbsp;</p><p>&nbsp;</p><h4><a name="其他" class="md-header-anchor"></a><span>其他</span></h4><p>&nbsp;</p><p>&nbsp;</p><p><img src="img/image-20220113080210982.png" referrerpolicy="no-referrer" alt="image-20220113080210982"></p><p>&nbsp;</p><p><span>注释(Text Annotation)</span>
+<span>用于对流程图中的元件进行解释说明。</span></p><p>&nbsp;</p><p><span>分组(Group)</span>
+<span>用带虚线的矩形框表达，本质上没有任何执行相关的含义</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h3><a name="举例" class="md-header-anchor"></a><span>举例</span></h3><figure><table><thead><tr><th>&nbsp;</th><th>&nbsp;</th></tr></thead><tbody><tr><td><span>流程图</span></td><td><img src="img/image-20220113222854368.png" referrerpolicy="no-referrer" alt="image-20220113222854368"></td></tr><tr><td><span>语义图</span></td><td><img src="img/image-20220113222905199.png" referrerpolicy="no-referrer" alt="image-20220113222905199"></td></tr></tbody></table></figure><p>&nbsp;</p><p><span>VP官网case</span></p><p><a href='https://online.visual-paradigm.com/cn/diagrams/templates/bpmn/' target='_blank' class='url'>https://online.visual-paradigm.com/cn/diagrams/templates/bpmn/</a></p><p>&nbsp;</p><p>&nbsp;</p><h3><a name="代码" class="md-header-anchor"></a><span>代码</span></h3><p><span>当你在建模的时候，计算机在干什么</span></p><p>&nbsp;</p><figure><table><thead><tr><th><span>我们的建模</span></th><th><span>计算机的记录</span></th></tr></thead><tbody><tr><td><img src="img/image-20220113081401631.png" referrerpolicy="no-referrer" alt="image-20220113081401631"></td><td><img src="img/image-20220113081428182.png" referrerpolicy="no-referrer" alt="image-20220113081428182"></td></tr></tbody></table></figure><p>&nbsp;</p><h3><a name="核心要点" class="md-header-anchor"></a><span>核心要点</span></h3><p>&nbsp;</p><p><img src="img/image-20220113080258611.png" referrerpolicy="no-referrer" alt="image-20220113080258611"></p><p>&nbsp;</p><h3><a name="流程动画" class="md-header-anchor"></a><span>流程动画</span></h3><p><span>参考手术室标本管理流程动画图</span></p><p><a href='https://weihuohuayi.github.io/process-simulation/' target='_blank' class='url'>https://weihuohuayi.github.io/process-simulation/</a></p><p>&nbsp;</p><iframe width="512" height="512" frameborder="0" src="https://weihuohuayi.github.io/process-simulation/" allowfullscreen="true"></iframe><p>&nbsp;</p><p>&nbsp;</p><h3><a name="流程仿真模拟" class="md-header-anchor"></a><span>流程仿真模拟</span></h3><p><a href='https://my.oschina.net/u/4587239/blog/4450428' target='_blank' class='url'>https://my.oschina.net/u/4587239/blog/4450428</a></p><p>&nbsp;</p><p>&nbsp;</p><h3><a name="系统设计" class="md-header-anchor"></a><span>系统设计</span></h3><p><span>依照特定的系统设计逻辑方法，完成系统功能、结构设计，以及参数化表征，并将设计内容与需求进行关联，确保追溯关系完整。</span></p><p><img src="img/image-20220113075847608.png" referrerpolicy="no-referrer" alt="image-20220113075847608"></p><p><img src="img/image-20220113080033738.png" referrerpolicy="no-referrer" alt="image-20220113080033738"></p><h3><a name="未来展望" class="md-header-anchor"></a><span>未来展望</span></h3><p><img src="img/image-20220113075609748.png" referrerpolicy="no-referrer" alt="image-20220113075609748"></p><p><img src="img/image-20220113075623195.png" referrerpolicy="no-referrer" alt="image-20220113075623195"></p><p>&nbsp;</p><p>&nbsp;</p><blockquote><p><span>期待大家在使用中继续交流</span></p></blockquote><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2><a name="activiti" class="md-header-anchor"></a><span>Activiti</span></h2><table cellspacing="0" cellpadding="0" border="1" style="color:rgb(0,0,0); font-family:Lucida,'Lucida Grande',Tahoma,sans-serif; font-size:13px; line-height:19px"><tbody><tr><td width="49" style="font-size:12px"> <p>序号</p> </td><td width="147" style="font-size:12px"> <p>技术组成</p> </td><td width="180" style="font-size:12px"> <p>Activiti</p> </td><td width="198" style="font-size:12px"> <p>jBPM</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>1</p> </td><td width="147" style="font-size:12px"> <p>数据库持久层ORM</p> </td><td width="180" style="font-size:12px"> <p>MyBatis3</p> </td><td width="198" style="font-size:12px"> <p>Hibernate3</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>2</p> </td><td width="147" style="font-size:12px"> <p>持久化标准</p> </td><td width="180" style="font-size:12px"> <p>无</p> </td><td width="198" style="font-size:12px"> <p>JPA规范</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>3</p> </td><td width="147" style="font-size:12px"> <p>事务管理</p> </td><td width="180" style="font-size:12px"> <p>MyBatis机制/Spring事务控制</p> </td><td width="198" style="font-size:12px"> <p>Bitronix，基于JTA事务管理</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>4</p> </td><td width="147" style="font-size:12px"> <p>数据库连接方式</p> </td><td width="180" style="font-size:12px"> <p>Jdbc/DataSource</p> </td><td width="198" style="font-size:12px"> <p>Jdbc/DataSource</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>5</p> </td><td width="147" style="font-size:12px"> <p>支持数据库</p> </td><td width="180" style="font-size:12px"> <p>Oracle、SQL Server、MySQL等多数数据库</p> </td><td width="198" style="font-size:12px"> <p>Oracle、SQL Server、MySQL等多数数据库</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>6</p> </td><td width="147" style="font-size:12px"> <p>设计模式</p> </td><td width="180" style="font-size:12px"> <p>Command模式、观察者模式等</p> </td><td width="198" style="font-size:12px">&nbsp;</td></tr><tr><td width="49" style="font-size:12px"> <p>7</p> </td><td width="147" style="font-size:12px"> <p>内部服务通讯</p> </td><td width="180" style="font-size:12px"> <p>Service间通过API调用</p> </td><td width="198" style="font-size:12px"> <p>基于Apache Mina异步通讯</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>8</p> </td><td width="147" style="font-size:12px"> <p>集成接口</p> </td><td width="180" style="font-size:12px"> <p>SOAP、Mule、RESTful</p> </td><td width="198" style="font-size:12px"> <p>消息通讯</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>9</p> </td><td width="147" style="font-size:12px"> <p>支持的流程格式</p> </td><td width="180" style="font-size:12px"> <p>BPMN2、xPDL、jPDL等</p> </td><td width="198" style="font-size:12px"> <p>目前仅只支持BPMN2 xml</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>10</p> </td><td width="147" style="font-size:12px"> <p>引擎核心</p> </td><td width="180" style="font-size:12px"> <p>PVM（流程虚拟机）</p> </td><td width="198" style="font-size:12px"> <p>Drools</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>11</p> </td><td width="147" style="font-size:12px"> <p>技术前身</p> </td><td width="180" style="font-size:12px"> <p>jBPM3、jBPM4</p> </td><td width="198" style="font-size:12px"> <p>Drools Flow</p> </td></tr><tr><td width="49" style="font-size:12px"> <p>12</p> </td><td width="147" style="font-size:12px"> <p>所属公司</p> </td><td width="180" style="font-size:12px"> <p>Alfresco</p> </td><td width="198" style="font-size:12px"> <p>jBoss.org</p> </td></tr></tbody></table><p><span>Activiti5与jBPM5技术组成</span></p></div>
+</body>
+</html>
